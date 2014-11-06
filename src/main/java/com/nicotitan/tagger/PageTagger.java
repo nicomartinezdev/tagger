@@ -13,8 +13,6 @@ import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nicotitan.tagger.factory.TaggerFactory;
-
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 
 /**
@@ -27,6 +25,8 @@ public class PageTagger {
 
     private static final String TXT_FILE_EXTENSION = ".txt";
     private static final String TAGGED_TEXT_FILE_SUFFIX = "taggedText-";
+    private static final String TAGGER_FILE = "edu/stanford/nlp/models/pos-tagger/english-left3words/english-left3words-distsim.tagger";
+    private static final MaxentTagger TAGGER = new MaxentTagger(TAGGER_FILE);
     private static Logger LOGGER = LoggerFactory.getLogger(PageTagger.class);
     
     public static void main(String[] args) throws IOException {
@@ -68,8 +68,7 @@ public class PageTagger {
 
         if (StringUtils.isNotEmpty(input)) {
             
-            MaxentTagger tagger = TaggerFactory.create();
-            output = tagger.tagString(input);
+            output = TAGGER.tagString(input);
             
         }
 
@@ -83,8 +82,8 @@ public class PageTagger {
         if (url != null) {
             Document doc = Jsoup.connect(url.toString()).get();
             if (doc != null) {
-                output = tagText(doc.text());               
-                LOGGER.info("Tagged text: {}", output);
+                output = doc.text();               
+                LOGGER.info("URL content as text: {}", output);
             }
         } else{
             LOGGER.error("The URL should not be null");
