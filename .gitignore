@@ -1,0 +1,25 @@
+##### Java #####
+.class
+
+#### IDEA intellij #####
+.idea/
+*.iml
+*.iws
+
+##### eclipse #####
+.project
+.classpath
+.settings/
+.metadata/
+.externalToolBuilders/
+maven-eclipse.xml
+
+#### Netbeans #####
+.nbm/
+.nbm
+nb-configuration.xml
+
+##### Maven #####
+target/
+log/
+/bin/
