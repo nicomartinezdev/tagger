@@ -23,6 +23,7 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 
 public class PageTagger {
 
+    private static final String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36";
     private static final String TXT_FILE_EXTENSION = ".txt";
     private static final String TAGGED_TEXT_FILE_SUFFIX = "taggedText-";
     private static final String TAGGER_FILE = "edu/stanford/nlp/models/pos-tagger/english-left3words/english-left3words-distsim.tagger";
@@ -80,7 +81,7 @@ public class PageTagger {
         String output = null;
 
         if (url != null) {
-            Document doc = Jsoup.connect(url.toString()).get();
+            Document doc = Jsoup.connect(url.toString()).userAgent(USER_AGENT).get();
             if (doc != null) {
                 output = doc.text();               
                 LOGGER.info("URL content as text: {}", output);
