@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -65,7 +64,6 @@ public class PageTaggerTest {
      * @throws IOException 
      */
     @Test
-    @Ignore
     public final void testMain_gumgumPublic() throws IOException {
         
         String[] args = {GUMGUM_PUBLIC_TEST_URL};

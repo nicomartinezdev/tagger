@@ -68,9 +68,12 @@ public class PageTagger {
         String output = null;
 
         if (StringUtils.isNotEmpty(input)) {
-            
-            output = TAGGER.tagString(input);
-            
+            String[] chunks = StringUtils.split(input, null);
+            StringBuilder sb = new StringBuilder();
+            for (int i=0; i<chunks.length; i++) {
+                sb.append(TAGGER.tagString(chunks[i]));
+            }
+            output = sb.toString();
         }
 
         return output;
@@ -83,7 +86,7 @@ public class PageTagger {
         if (url != null) {
             Document doc = Jsoup.connect(url.toString()).userAgent(USER_AGENT).get();
             if (doc != null) {
-                output = doc.text();               
+                output = doc.text();
                 LOGGER.info("URL content as text: {}", output);
             }
         } else{
